@@ -3,6 +3,9 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
+import Flex from 'lib-flexible'
+
+Vue.use(Flex)
 
 Vue.config.productionTip = false
 
