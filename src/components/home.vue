@@ -79,6 +79,7 @@
 
   .company-intro {
     @include box-wrap;
+    background-color: white;
     padding-bottom: 7px;
     p {
       text-indent: 15px;
@@ -98,6 +99,7 @@
 
   .company-style {
     @include box-wrap;
+    background-color: white;
     padding-bottom: 15px;
     .part-wrap {
       @include part-title;

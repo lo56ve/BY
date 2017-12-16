@@ -2,6 +2,7 @@ $theme-color: rgb(255, 195, 194);
 $theme-font-color: rgb(251, 122, 158);
 $theme-gray-color: rgb(177, 176, 176);
 $theme-border-color: rgb(224, 223, 223);
+$theme-gray-bgcolor: rgb(238, 236, 236);
 
 @mixin box-wrap {
   margin-top: 7px;
@@ -66,5 +67,9 @@ $theme-border-color: rgb(224, 223, 223);
 
 .icon-email:before {
   content: '\e692';
+}
+
+.icon-search:before {
+  content: '\e960';
 }
 

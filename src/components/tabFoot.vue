@@ -52,13 +52,11 @@
 
 <style lang="scss" scoped>
   $theme-gray-color: rgb(177, 176, 176);
-  $theme-gray-bgcolor: rgb(238, 236, 236);
   $theme-bgcolor: rgb(251, 122, 158);
   $theme-select-color: rgb(253, 158, 182);
 
   .copyright-wrap {
     padding: 15px 0 65px 0;
-    background-color: $theme-gray-bgcolor;
     p {
       text-align: center;
       color: $theme-gray-color;

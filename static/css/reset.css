@@ -26,6 +26,7 @@ main, article, aside, figure, footer, header, nav, section, details, summary {di
    http://css-tricks.com/inheriting-box-sizing-probably-slightly-better-best-practice/ */
 html {
 	box-sizing: border-box;
+  background-color: rgb(238, 236, 236);
 }
 
 *,
