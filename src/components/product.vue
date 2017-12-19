@@ -1,9 +1,9 @@
 <template>
     <div>
-      <ul class="sort-wrap">
+      <ul class="sort-wrap" v-show="!isShowCurrent">
         <li v-for="(item, index) in sortArr" :class="{'is-selected': index === selectIndex}" @touchstart="selectSort(index)">
           {{item}}
-          <img v-show="index === selectIndex" src="/static/images/selected.png" alt="">
+          <img v-show="index === selectIndex" src="/index/images/selected.png" alt="">
         </li>
       </ul>
 
@@ -11,14 +11,18 @@
         <p class="part-wrap">
           <span class="title" @touchstart="hideDetail">{{sortArr[selectIndex]}} >></span>
           <span class="product-sort" v-html="currentItem.sort"></span>
-          <input class="search-text" type="text" v-show="isShowSearch" placeholder="搜索" @blur="hideSearch">
-          <label><span class="iconfont icon-search" @touchstart="showSearch" v-show="!isShowSearch"></span></label>
-          <label><input type="checkbox">唇彩管</label>
-          <label><input type="checkbox">口红管</label>
+          <input class="search-text" type="text" v-show="isShowSearch && !isShowCurrent" placeholder="搜索" @blur="hideSearch">
+          <label v-show="!isShowCurrent"><span class="iconfont icon-search" @touchstart="showSearch" v-show="!isShowSearch"></span></label>
+          <label class="sub-sort" v-show="!isShowCurrent">
+            <div @click="showSubSort">{{subSortSelect}} <span :class="[isShowSubSort ? 'icon-top' : 'icon-bottom', 'iconfont']"></span></div>
+            <ul :class="isShowSubSort ? 'show-subsort' : 'hide-subsort'">
+              <li v-for="(sortItem, index) in subSortArr" @click="selectSubSort(index)">{{sortItem}}</li>
+            </ul>
+          </label>
         </p>
 
         <ul class="product-list" v-show="!isShowCurrent">
-          <li v-for="item in products" @touchstart="showDetail(item)">
+          <li v-for="item in products" @click="showDetail(item)">
             <img :src="item.src[0]" alt="">
             <div>{{ item.itemId }}</div>
           </li>
@@ -41,20 +45,25 @@
         selectIndex: 0,
         currentItem: '',
         isShowCurrent: false,
-        isShowSearch: false
+        isShowSearch: false,
+        // 待修改
+        subSortArr: ['全部', '口红管', '唇彩管'],
+        subSortSelect: '',
+        isShowSubSort: false
       }
     },
     created () {
       for (let i = 0; i < 10; i++) {
         this.products.push({
           src: [
-            '/static/images/product/product_02.jpg',
-            '/static/images/product/product_01.jpg'
+            '/index/images/product_02.jpg',
+            '/index/images/product_01.jpg'
           ],
           itemId: 5182,
           sort: '口红'
         })
       }
+      this.subSortSelect = this.subSortArr[0]
     },
     methods: {
       showDetail (item) {
@@ -73,6 +82,19 @@
       },
       hideSearch () {
         this.isShowSearch = false
+      },
+      showSubSort () {
+        this.isShowSubSort = !this.isShowSubSort
+      },
+      selectSubSort (index) {
+        this.subSortSelect = this.subSortArr[index]
+        this.isShowSubSort = false
+      }
+    },
+    mounted () {
+      if (this.$route.query.id === '123') {
+        this.isShowCurrent = true
+        this.currentItem = this.products[0]
       }
     }
   }
@@ -123,20 +145,42 @@
     position: relative;
     .part-wrap {
       @include part-title;
-      margin-bottom: 0;
       color: $theme-font-color;
       position: relative;
+      .title {
+        font-size: 14px;
+      }
       .product-sort {
-        font-size: 18px;
+        font-size: 14px;
         margin-left: 5px;
       }
       label {
         float: right;
         font-size: 13px;
-        line-height: 25px;
         margin-right: 10px;
-        input {
-          vertical-align: middle;
+        line-height: 25px;
+      }
+      .sub-sort {
+        position: relative;
+        width: 60px;
+        text-align: center;
+        ul {
+          position: absolute;
+          width: 80px;
+          background-color: white;
+          box-shadow: $theme-gray-color 0 0 2px;
+          left: -10px;
+          border-radius: 3px;
+          li {
+            border-top: 1px solid $theme-gray-color;
+            padding: 2px;
+          }
+        }
+        .hide-subsort {
+          display: none;
+        }
+        .show-subsort {
+          display: block;
         }
       }
       .search-text {
@@ -146,19 +190,11 @@
         padding-left: 8px;
         height: 22px;
         border-radius: 11px;
+        width: 160px;
         border: 1px solid $theme-font-color;
         outline: none;
         tap-highlight-color: rgba(0, 0, 0, 0);
       }
-    }
-    .menu-wrap {
-      margin: 0 15px;
-      height: 40px;
-      width: 345px;
-      box-sizing: border-box;
-      background-color: $theme-font-color;
-      position: fixed;
-      top: 100px;
     }
     .product-list {
       margin: 0 15px;

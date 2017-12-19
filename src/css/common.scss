@@ -38,7 +38,7 @@ $theme-gray-bgcolor: rgb(238, 236, 236);
 
 @font-face {
   font-family: 'iconfont';
-  src: url('/static/font/iconfont.ttf') format('truetype');
+  src: url('/index/font/iconfont.ttf') format('truetype');
 }
 
 .iconfont {
@@ -73,3 +73,10 @@ $theme-gray-bgcolor: rgb(238, 236, 236);
   content: '\e960';
 }
 
+.icon-top:before {
+  content: '\e603';
+}
+
+.icon-bottom:before {
+  content: '\e602';
+}

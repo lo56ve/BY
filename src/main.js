@@ -4,8 +4,10 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import Flex from 'lib-flexible'
+import Router from 'vue-router'
 
 Vue.use(Flex)
+Vue.use(Router)
 
 Vue.config.productionTip = false
 

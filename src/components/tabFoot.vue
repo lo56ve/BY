@@ -24,8 +24,6 @@
 </template>
 
 <script>
-  import router from '@/router'
-
   export default {
     data () {
       return {
@@ -35,15 +33,15 @@
 
     methods: {
       toHome () {
-        router.replace({ path: '/' })
+        this.$router.replace({ path: '/' })
         this.selectIndex = 0
       },
       toProduct () {
-        router.replace({ path: '/product' })
+        this.$router.replace({ path: '/product' })
         this.selectIndex = 1
       },
       toContact () {
-        router.replace({ path: '/contact' })
+        this.$router.replace({ path: '/contact' })
         this.selectIndex = 2
       }
     }

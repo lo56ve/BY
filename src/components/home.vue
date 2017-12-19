@@ -1,7 +1,7 @@
 <template>
     <div>
       <Carousel class="carousel-wrap">
-        <div v-for="item in carouselArr" :auto="3000">
+        <div v-for="item in carouselArr" :auto="3000" @click="showProduct">
           <img :src="item" alt="">
         </div>
       </Carousel>
@@ -27,12 +27,12 @@
       <div class="company-style">
         <p class="part-wrap"><span class="title">企业风采</span><span class="title-en">TEAM STYLE</span></p>
         <div class="img-wrap">
-          <img src="/static/images/company_01.jpg" alt="">
-          <img src="/static/images/company_02.png" alt="">
-          <img src="/static/images/company_03.png" alt="">
-          <img src="/static/images/company_04.png" alt="">
-          <img src="/static/images/company_05.png" alt="">
-          <img src="/static/images/company_06.png" alt="">
+          <img src="/index/images/company_01.jpg" alt="">
+          <img src="/index/images/company_02.png" alt="">
+          <img src="/index/images/company_03.png" alt="">
+          <img src="/index/images/company_04.png" alt="">
+          <img src="/index/images/company_05.png" alt="">
+          <img src="/index/images/company_06.png" alt="">
         </div>
       </div>
     </div>
@@ -51,9 +51,9 @@
     },
     created () {
       this.carouselArr = [
-        '/static/images/carousel/1.jpg',
-        '/static/images/carousel/2.jpg',
-        '/static/images/carousel/3.jpg'
+        '/index/images/1.jpg',
+        '/index/images/2.jpg',
+        '/index/images/3.jpg'
       ]
     },
     methods: {
@@ -62,6 +62,9 @@
       },
       changeLang () {
         this.isEnglish = !this.isEnglish
+      },
+      showProduct () {
+        this.$router.push({path: '/product', query: {id: '123'}})
       }
     },
     components: {
@@ -105,16 +108,13 @@
       @include part-title;
     }
     .img-wrap {
-      width: 320px;
+      max-width: 340px;
+      width: 340px;
       margin: 0 auto;
-      display: flex;
-      flex-flow: row wrap;
-      justify-content: space-between;
       img {
-        width: 95px;
+        width: 100px;
         height: 100%;
-        flex: 1;
-        margin-right: 10px;
+        margin-left: 8px;
         margin-top: 10px;
       }
     }

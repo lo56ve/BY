@@ -21,7 +21,7 @@ module.exports = {
   },
   postcss: [
     require('autoprefixer')({
-      browsers: '> 5%'
+      browsers: ['Android >= 4', 'ios >= 7']
     }),
     require('postcss-px2rem')({
       remUnit: 37.5
