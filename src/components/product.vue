@@ -12,13 +12,9 @@
           <span class="title" @touchstart="hideDetail">{{sortArr[selectIndex]}} >></span>
           <span class="product-sort" v-html="currentItem.sort"></span>
           <input class="search-text" type="text" v-show="isShowSearch && !isShowCurrent" placeholder="搜索" @blur="hideSearch">
-          <label v-show="!isShowCurrent"><span class="iconfont icon-search" @touchstart="showSearch" v-show="!isShowSearch"></span></label>
-          <label class="sub-sort" v-show="!isShowCurrent">
-            <div @click="showSubSort">{{subSortSelect}} <span :class="[isShowSubSort ? 'icon-top' : 'icon-bottom', 'iconfont']"></span></div>
-            <ul :class="isShowSubSort ? 'show-subsort' : 'hide-subsort'">
-              <li v-for="(sortItem, index) in subSortArr" @click="selectSubSort(index)">{{sortItem}}</li>
-            </ul>
-          </label>
+          <span class="pull-right" v-show="!isShowSearch && !isShowCurrent"><span class="iconfont icon-search" @touchstart="showSearch" v-show="!isShowSearch"></span></span>
+          <span class="pull-right" v-show="!isShowSearch && !isShowCurrent"><input id="checkbox1" type="checkbox"><label :class="{checked: isChecked1}" for="checkbox1" @click="selectSubsort1"></label>口红管</span>
+          <span class="pull-right" v-show="!isShowSearch && !isShowCurrent"><input id="checkbox2" type="checkbox"><label :class="{checked: isChecked2}" for="checkbox2" @click="selectSubsort2"></label>唇彩管</span>
         </p>
 
         <ul class="product-list" v-show="!isShowCurrent">
@@ -46,10 +42,9 @@
         currentItem: '',
         isShowCurrent: false,
         isShowSearch: false,
-        // 待修改
-        subSortArr: ['全部', '口红管', '唇彩管'],
-        subSortSelect: '',
-        isShowSubSort: false
+        // 多选框全部重做
+        isChecked1: false,
+        isChecked2: false
       }
     },
     created () {
@@ -63,7 +58,6 @@
           sort: '口红'
         })
       }
-      this.subSortSelect = this.subSortArr[0]
     },
     methods: {
       showDetail (item) {
@@ -83,12 +77,11 @@
       hideSearch () {
         this.isShowSearch = false
       },
-      showSubSort () {
-        this.isShowSubSort = !this.isShowSubSort
+      selectSubsort1 () {
+        this.isChecked1 = !this.isChecked1
       },
-      selectSubSort (index) {
-        this.subSortSelect = this.subSortArr[index]
-        this.isShowSubSort = false
+      selectSubsort2 () {
+        this.isChecked2 = !this.isChecked2
       }
     },
     mounted () {
@@ -117,7 +110,6 @@
       line-height: 38px;
       font-size: 14px;
       color: $theme-font-color;
-      border-right: 1px solid $theme-font-color;
       position: relative;
       img {
         height: 10px;
@@ -127,9 +119,6 @@
         left: 50%;
         margin-left: -5px;
         z-index: 100;
-      }
-      &:last-child {
-        border: 0;
       }
     }
     .is-selected {
@@ -154,33 +143,34 @@
         font-size: 14px;
         margin-left: 5px;
       }
-      label {
+      .pull-right {
         float: right;
         font-size: 13px;
         margin-right: 10px;
-        line-height: 25px;
-      }
-      .sub-sort {
-        position: relative;
-        width: 60px;
-        text-align: center;
-        ul {
-          position: absolute;
-          width: 80px;
-          background-color: white;
-          box-shadow: $theme-gray-color 0 0 2px;
-          left: -10px;
-          border-radius: 3px;
-          li {
-            border-top: 1px solid $theme-gray-color;
-            padding: 2px;
-          }
-        }
-        .hide-subsort {
+        line-height: 20px;
+        input {
           display: none;
         }
-        .show-subsort {
-          display: block;
+        label {
+          background-color: #fafafa;
+          border: 1px solid $theme-font-color;
+          box-shadow: 0 1px 2px rgba(0,0,0,0.05), inset 0px -15px 10px -12px rgba(0,0,0,0.05);
+          padding: 7px;
+          border-radius: 3px;
+          display: inline-block;
+          position: relative;
+          margin-right: 3px;
+          margin-bottom: -2px;
+        }
+        .checked {
+          &:after {
+            content: '\2714';
+            font-size: 20px;
+            position: absolute;
+            top: -5px;
+            left: 0px;
+            color: $theme-font-color;
+          }
         }
       }
       .search-text {
