@@ -187,12 +187,13 @@
       }
     }
     .product-list {
-      margin: 0 15px;
+      width: 345px;
+      margin: 0 auto;
       display: flex;
       flex-flow: row wrap;
       margin-bottom: 20px;
       li {
-        width: 172px;
+        width: 50%;
         border-bottom: 1px solid $theme-border-color;
         &:nth-child(2n-1) {
           border-right: 1px solid $theme-border-color;
