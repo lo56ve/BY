@@ -15,7 +15,11 @@ axios.interceptors.request.use(config => {
 // 拦截相应
 axios.interceptors.response.use(response => {
   // 此处可做不同响应状态码的处理
-  return response
+  if (response.status === 200) {
+    return response.data
+  } else {
+    alert('获取失败')
+  }
 }, error => {
   return Promise.reject(error.response)
 })
@@ -25,26 +29,26 @@ export default {
     // 通过axios实例请求
     return axios({
       method: 'post',
-      baseURL: 'https://cnodejs.org/api/v1',        // 请求的根路径，根据实际情况做修改
+      baseURL: '',        // 请求的根路径，根据实际情况做修改
       url,
       data: qs.stringify(data),                     // 如果是post请求，将请求参数序列化
-      timeout: 5000,
-      headers: {                                    // 设置请求头，post和get不同
-        'X-Requested-With': 'XMLHttpRequest',
-        'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
-      }
+      timeout: 5000
+      // headers: {                                    // 设置请求头，post和get不同
+      //   'X-Requested-With': 'XMLHttpRequest',
+      //   'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+      // }
     })
   },
   get (url, params) {
     return axios({
       method: 'get',
-      baseURL: 'https://cnodejs.org/api/v1',
+      baseURL: '',
       url,
       params,                                       // get请求时带的参数
-      timeout: 5000,
-      headers: {
-        'X-Requested-With': 'XMLHttpRequest'
-      }
+      timeout: 5000
+      // headers: {
+      //   'X-Requested-With': 'XMLHttpRequest'
+      // }
     })
   }
 }

@@ -46,6 +46,16 @@ module.exports = {
     // In our experience, they generally work as expected,
     // just be aware of this issue when enabling this option.
     cssSourceMap: false,
+    // 跨域处理
+    proxyTable: {
+      '/api': {
+        target: 'http://127.0.0.1:8088',
+        changeOrigin: true,
+        pathRewrite: {
+          '^/api': ''
+        }
+      }
+    }
   },
 
   build: {
@@ -77,5 +87,9 @@ module.exports = {
     // `npm run build --report`
     // Set to `true` or `false` to always turn it on or off
     bundleAnalyzerReport: process.env.npm_config_report
+  },
+
+  mock: {
+    proxyPort: 8088
   }
 }
